@@ -1,0 +1,698 @@
+<!-- Preloader -->
+<div id="preloader">
+  <div class="loader">
+    <img src="eduwave.jpg" alt="EduWave Logo" class="preloader-logo">
+    <p>Welcome to <strong>EduWave International School</strong>...</p>
+    <div class="loading-bar"><span></span></div>
+  </div>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EduWave Internation School</title>
+
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ====== GLOBAL THEME ====== */
+    :root {
+      --primary: #0a1f44;
+      --accent: #007bff;
+      --bg: #f5f7fa;
+      --white: #fff;
+      --text: #222;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s;
+    }
+
+    /* ====== DARK MODE ====== */
+    body.dark {
+      --primary: #121212;
+      --bg: #0c0c0c;
+      --text: #e0e0e0;
+      --white: #1e1e1e;
+      --accent: #3b82f6;
+    }
+
+    /* ====== PRELOADER ====== */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    #preloader .loader {
+      text-align: center;
+    }
+
+    .preloader-logo {
+      width: 100px;
+      animation: pulse 2s infinite;
+      margin-bottom: 1rem;
+    }
+
+    .loading-bar {
+      width: 120px;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .loading-bar span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      animation: loading 2.2s infinite ease-in-out;
+    }
+
+    @keyframes loading {
+      0% { width: 0; }
+      50% { width: 100%; }
+      100% { width: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    /* ====== NAVIGATION ====== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--primary);
+      color: var(--white);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    .dark-btn {
+      border: none;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .dark-btn:hover {
+      background: #0056cc;
+    }
+
+    /* ====== HERO SECTION ====== */
+    .hero {
+      background: linear-gradient(rgba(10,31,68,0.6), rgba(10,31,68,0.6)), url('IMG/school-bg.jpg') center/cover no-repeat;
+      color: var(--white);
+      text-align: center;
+      padding: 6rem 1rem;
+      position: relative;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.9rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #0056cc;
+      transform: scale(1.05);
+    }
+
+    /* ====== FEATURES & CARDS ====== */
+    .card, .feature {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      max-width: 900px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover, .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .feature-img {
+      width: 45%;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .feature-text {
+      flex: 1;
+    }
+
+    /* ====== STATS ====== */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      text-align: center;
+      padding: 3rem 1rem;
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .stat h3 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      color: var(--accent);
+    }
+
+    /* ====== NEWSLETTER ====== */
+    .newsletter {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: var(--white);
+      border-top: 1px solid #eee;
+    }
+
+    .newsletter h3 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .inline-form {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .inline-form input {
+      padding: 0.8rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 250px;
+      outline: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border: none;
+      color: var(--white);
+      border-radius: 6px;
+      padding: 0.8rem 1.2rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* ====== FOOTER ====== */
+    .footer-cta {
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .btn-outline {
+      border: 2px solid var(--white);
+      background: transparent;
+      color: var(--white);
+    }
+
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--primary);
+    }
+
+    .site-footer {
+      background: #0a1f44;
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .socials a {
+      color: var(--accent);
+      margin: 0 0.4rem;
+      text-decoration: none;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .feature {
+        flex-direction: column;
+        text-align: center;
+      }
+      .feature-img {
+        width: 100%;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--primary);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        text-align: center;
+        padding: 1rem 0;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .menu-icon {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">EduWave International School</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Academics</a></li>
+        <li><a href="admission.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="classes.html">Classes</a></li>
+        
+      </ul>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <button id="darkModeToggle" class="dark-btn">🌙</button>
+    </nav>
+  </header>
+<!-- ====== Hero Section ====== -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Welcome to EduWave International School</h1>
+    <p>Empowering Students for a Brighter Future</p>
+    <a href="admission.html" class="btn">Apply Now</a>
+  </div>
+</section>
+
+<style>
+/* ====== Base Styles ====== */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ====== Hero Section ====== */
+.hero {
+  background: url("IMG/hero-bg.jpg") center/cover no-repeat; /* Replace with your image */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Add an overlay for better text visibility */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: #0ea5e9;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #0284c7;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .hero {
+    height: 80vh;
+    padding: 40px 15px;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 10px 22px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: auto;
+    padding: 60px 15px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+
+    
+  
+
+
+
+
+
+
+
+
+<!-- ====== SPORTS SECTION ====== -->
+<section id="sports" style="padding:60px 20px; background:#f9f9f9; font-family:'Poppins',sans-serif;">
+  <h2 style="text-align:center; font-size:2.5em; color:#0ea5e9; margin-bottom:40px;">Sports Activities</h2>
+  <p style="text-align:center; max-width:700px; margin:0 auto 50px; color:#444;">
+    At EduWave International School, we believe sports build teamwork, discipline, and a healthy competitive spirit. 
+    Our students participate in various sporting activities designed to develop both mind and body.
+  </p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; max-width:1200px; margin:auto;">
+    
+    <!-- Football -->
+    <div style="background:white; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="football.jpg" alt="Football" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Football</h3>
+        <p style="color:#555; line-height:1.6;">
+          Football is one of our most loved sports, teaching teamwork, endurance, and leadership. 
+          Our teams train regularly and compete in inter-school tournaments.
+        </p>
+      </div>
+    </div>
+
+    <!-- Basketball -->
+    <div style="background:white; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="basket ball.webp" alt="Basketball" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Basketball</h3>
+        <p style="color:#555; line-height:1.6;">
+          Basketball builds strategy, agility, and coordination. Our school courts are always active 
+          with friendly matches that promote physical fitness and teamwork.
+        </p>
+      </div>
+    </div>
+
+    <!-- Athletics -->
+    <div style="background:white; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="athletic.jpg" alt="Athletics" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Athletics</h3>
+        <p style="color:#555; line-height:1.6;">
+          From sprinting to long-distance running, athletics encourages determination and discipline.
+          Our students take pride in representing the school in regional events.
+        </p>
+      </div>
+    </div>
+
+    <!-- Volleyball -->
+    <div style="background:white; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="volleyball.webp" alt="Volleyball" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Volleyball</h3>
+        <p style="color:#555; line-height:1.6;">
+          Volleyball promotes coordination and teamwork. Our volleyball team trains with enthusiasm 
+          and participates in both friendly and competitive matches.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<!-- ====== CLASS SECTION ====== -->
+<section id="classes" style="padding:60px 20px; background:#fff; font-family:'Poppins',sans-serif;">
+  <h2 style="text-align:center; font-size:2.5em; color:#0ea5e9; margin-bottom:40px;">Our School Classes</h2>
+  <p style="text-align:center; max-width:700px; margin:0 auto 50px; color:#444;">
+    At EduWave International School, our classes are designed to nurture creativity, academic excellence, and character development. 
+    Each level provides a supportive environment that helps students grow intellectually and socially.
+  </p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; max-width:1200px; margin:auto;">
+    
+    <!-- Nursery Class -->
+    <div style="background:#f9f9f9; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="nursery.jpg" alt="Nursery Class" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Nursery Class</h3>
+        <p style="color:#555; line-height:1.6;">
+          Our nursery class focuses on foundational learning through play, storytelling, and interactive activities that make education fun and engaging for young learners.
+        </p>
+      </div>
+    </div>
+
+    <!-- Primary Class -->
+    <div style="background:#f9f9f9; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="primary.jpg" alt="Primary Class" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Primary Class</h3>
+        <p style="color:#555; line-height:1.6;">
+          The primary section builds a strong academic base with creative and hands-on lessons that help students develop confidence, problem-solving, and communication skills.
+        </p>
+      </div>
+    </div>
+
+    <!-- Junior Secondary -->
+    <div style="background:#f9f9f9; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="junior secondary.jpg" alt="Junior Secondary" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Junior Secondary</h3>
+        <p style="color:#555; line-height:1.6;">
+          Our junior secondary program emphasizes academic growth, moral discipline, and skill development. Students explore core subjects and start identifying their passions.
+        </p>
+      </div>
+    </div>
+
+    <!-- Senior Secondary -->
+    <div style="background:#f9f9f9; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden;">
+      <img src="secondary.jpg" alt="Senior Secondary" style="width:100%; height:220px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9;">Senior Secondary</h3>
+        <p style="color:#555; line-height:1.6;">
+          In our senior classes, students are prepared for higher education and career paths through intensive academic work, leadership training, and mentorship programs.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+<!-- ====== Teachers Section ====== -->
+<section id="teachers" style="padding: 60px 20px; background: #f9fafb;">
+  <h2 style="text-align:center; color:#0ea5e9; font-size:2rem; margin-bottom: 10px;">Our Dedicated Teachers</h2>
+  <p style="text-align:center; color:#555; max-width:600px; margin:0 auto 40px;">
+    At EduWave International School, our teachers are passionate about nurturing young minds and inspiring lifelong learning.
+  </p>
+
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
+
+    <!-- ===== Teacher 1 ===== -->
+    <div style="background:#fff; border-radius:15px; width:280px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; text-align:center;">
+      <img src="TEACHER 1.jpg" alt="Teacher 1" style="width:100%; height:280px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9; margin-bottom:5px;">Mrs. Jenny John</h3>
+        <p style="font-weight:500; color:#666; margin-bottom:10px;">Head of Science Department</p>
+        <p style="font-size:14px; color:#555;">
+          Mrs. Jenny is a passionate educator with over 10 years of experience teaching Physics and inspiring curiosity through experiments and innovation.
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== Teacher 2 ===== -->
+    <div style="background:#fff; border-radius:15px; width:280px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; text-align:center;">
+      <img src="TEACHER3.jpg" alt="Teacher 2" style="width:100%; height:280px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9; margin-bottom:5px;">Mr.  Johnson</h3>
+        <p style="font-weight:500; color:#666; margin-bottom:10px;">Mathematics Instructor</p>
+        <p style="font-size:14px; color:#555;">
+          Mr. Johnson brings learning to life with practical problem-solving techniques that make Mathematics engaging and understandable for all students.
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== Teacher 3 ===== -->
+    <div style="background:#fff; border-radius:15px; width:280px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; text-align:center;">
+      <img src="TEACHER 2.jpg" alt="Teacher 3" style="width:100%; height:280px; object-fit:cover;">
+      <div style="padding:20px;">
+        <h3 style="color:#0ea5e9; margin-bottom:5px;">Mrs. Helen </h3>
+        <p style="font-weight:500; color:#666; margin-bottom:10px;">English Language Teacher</p>
+        <p style="font-size:14px; color:#555;">
+          Known for her creative storytelling and reading programs, Mrs. Helenhelps students develop strong communication and writing skills.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+  
+   
+  
+
+  <!-- Keep your existing features and footer sections as before -->
+
+  <script>
+    // ====== PRELOADER FUNCTION ======
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      preloader.style.opacity = "0";
+      preloader.style.visibility = "hidden";
+    });
+
+    // ====== TOGGLE MENU ======
+    function toggleMenu() {
+      document.querySelector(".nav-links").classList.toggle("active");
+    }
+
+    // ====== DARK MODE TOGGLE ======
+    const darkBtn = document.getElementById("darkModeToggle");
+    darkBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      const isDark = document.body.classList.contains("dark");
+      darkBtn.textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("darkMode", isDark);
+    });
+
+    // Remember user's dark mode preference
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+        darkBtn.textContent = "☀️";
+      }
+    });
+  </script>
+</body>
+</html>
+

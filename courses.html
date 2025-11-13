@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academics — EduWave School</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== Modern Academic Page Styling ===== */
+    :root {
+      --brand: #0ea5e9;
+      --brand-dark: #0369a1;
+      --text: #1e293b;
+      --light-bg: #f8fafc;
+      --white: #ffffff;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: var(--light-bg);
+      color: var(--text);
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background: var(--brand);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .navbar .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #dbeafe;
+    }
+
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    .dark-btn {
+      background: transparent;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      font-size: 1.3rem;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+    }
+
+    .page-header h1 {
+      font-size: 2.3rem;
+      color: var(--brand-dark);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      color: #475569;
+      font-size: 1.1rem;
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .course {
+      background: var(--white);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .course:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .course img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 4px solid var(--brand);
+    }
+
+    .course-content {
+      padding: 1.5rem;
+    }
+
+    .course-content h3 {
+      color: var(--brand-dark);
+      margin-bottom: 0.6rem;
+      font-size: 1.3rem;
+    }
+
+    .course-content p {
+      color: #475569;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: var(--brand);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    /* ===== Responsive Navbar ===== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--brand-dark);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 1rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+    }
+
+    /* ===== Dark Mode ===== */
+    body.dark {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    body.dark .course {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+
+    body.dark .course-content h3 {
+      color: #38bdf8;
+    }
+
+    body.dark footer {
+      background: #1e3a8a;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Navbar ===== -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">EduWave International School</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Academics</a></li>
+        <li><a href="classes.html">Classes</a></li>
+        <li><a href="admission.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <button id="darkModeToggle" class="dark-btn">🌙</button>
+    </nav>
+  </header>
+
+  <!-- ===== Academic Section ===== -->
+  <section class="page-header">
+    <h1>Our Academic Programs</h1>
+    <p>Explore our diverse academic departments and subjects at EduWave International School.</p>
+  </section>
+
+  <section class="courses">
+    <div class="course">
+      <img src="science department.png" alt="Science Department">
+      <div class="course-content">
+        <h3>Science Department 🔬</h3>
+        <p>Physics, Chemistry, Biology, Mathematics, Computer Science.</p>
+      </div>
+    </div>
+
+    <div class="course">
+      <img src="art department.jpg" alt="Arts Department">
+      <div class="course-content">
+        <h3>Arts Department 🎨</h3>
+        <p>Literature, History, Fine Arts, Music, Civic Education.</p>
+      </div>
+    </div>
+
+    <div class="course">
+      <img src="commercial department.jpg" alt="Commercial Department">
+      <div class="course-content">
+        <h3>Commercial Department 💼</h3>
+        <p>Accounting, Economics, Business Studies, Commerce.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>© 2025 EduWave International School. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    }
+
+    // Dark Mode
+    const toggleBtn = document.getElementById('darkModeToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>

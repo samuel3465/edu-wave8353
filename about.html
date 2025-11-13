@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — EduWave International School</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --primary: #0a1f44;
+      --accent: #007bff;
+      --bg: #f5f7fa;
+      --text: #222;
+      --white: #fff;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+      line-height: 1.6;
+    }
+
+    body.dark {
+      --primary: #0d1117;
+      --bg: #0c0c0c;
+      --text: #e0e0e0;
+      --white: #1e1e1e;
+      --accent: #3b82f6;
+    }
+
+    /* ===== Preloader ===== */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #ccc;
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--primary);
+      padding: 1rem 2rem;
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    .menu-icon {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .dark-btn {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    /* ===== Header ===== */
+    .page-header {
+      background: linear-gradient(rgba(10, 31, 68, 0.6), rgba(10, 31, 68, 0.6)),
+        url("IMG/school-bg.jpg") center/cover no-repeat;
+      color: var(--white);
+      text-align: center;
+      padding: 6rem 1rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 1.1rem;
+    }
+
+    /* ===== Content ===== */
+    .container {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .about-hero {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeIn 1s ease;
+    }
+    .about-hero h1 {
+      color: var(--primary);
+      font-size: 2.2rem;
+    }
+    .about-hero p {
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .mission {
+      margin-bottom: 3rem;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .grid-2 div {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s;
+    }
+    .grid-2 div:hover {
+      transform: translateY(-5px);
+    }
+    .grid-2 h3 {
+      color: var(--accent);
+    }
+
+    .values {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .values h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .values ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .values li {
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* ===== Staff (Flip Cards) ===== */
+    .staff {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .staff h2 {
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      perspective: 1000px;
+    }
+
+    .teacher {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
+      cursor: pointer;
+    }
+
+    .teacher:hover {
+      transform: rotateY(180deg);
+    }
+
+    .teacher .front,
+    .teacher .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .teacher .front {
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .teacher img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .teacher .front h4 {
+      color: var(--accent);
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
+      text-transform: capitalize;
+    }
+
+    .teacher .front p {
+      color: var(--text);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .teacher .back {
+      background: var(--accent);
+      color: var(--white);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .teacher .back h4 {
+      margin-bottom: 0.5rem;
+    }
+    .teacher .back p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--primary);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        text-align: center;
+        padding: 1rem 0;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .menu-icon {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+    <p>Loading EduWave International School...</p>
+  </div>
+
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">EduWave International School</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Academics</a></li>
+        <li><a href="admission.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="classes.html">Classes</a></li>
+      </ul>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <button id="darkModeToggle" class="dark-btn">🌙</button>
+    </nav>
+  </header>
+    
+
+  <!-- Header -->
+  <section class="page-header">
+    <h1>About Our School</h1>
+    <p>Learn more about who we are and what we stand for.</p>
+  </section>
+
+  <!-- Content -->
+  <main class="container">
+    <section class="about-hero">
+      <h1>About EduWave</h1>
+      <p>EduWave International School was founded on the belief that a strong foundation in values and skills prepares students for a global future.</p>
+    </section>
+
+    <section class="mission">
+      <h2>Mission & Vision</h2>
+      <div class="grid-2">
+        <div>
+          <h3>Mission</h3>
+          <p>To provide world-class education that develops confident, ethical, and curious learners ready to contribute positively to society.</p>
+        </div>
+        <div>
+          <h3>Vision</h3>
+          <p>To be a leading school known for innovation, inclusion, and academic excellence across all learning levels.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="values">
+      <h2>Our Core Values</h2>
+      <ul>
+        <li>Integrity</li>
+        <li>Excellence</li>
+        <li>Discipline</li>
+        <li>Innovation</li>
+      </ul>
+    </section>
+
+    <section class="staff">
+      <h2>Leadership & Faculty</h2>
+      <div class="staff-grid">
+        <article class="teacher">
+          <div class="front">
+            <img src="principal.jpg" alt="Principal photo" />
+            <h4>Dr. Helen Beard</h4>
+            <p>Principal</p>
+          </div>
+          <div class="back">
+            <h4>Dr. Helen Beard</h4>
+            <p>Leads the EduWave vision with over 20 years of experience in global education leadership and child-centered learning.</p>
+          </div>
+        </article>
+
+        <article class="teacher">
+          <div class="front">
+            <img src="vice principal.jpg"alt="Vice Principal photo" />
+            <h4>Mrs. Sonia Donald</h4>
+            <p>Vice Principal</p>
+          </div>
+          <div class="back">
+            <h4>Mrs. Sonia Donald</h4>
+            <p>Dedicated to mentoring teachers and ensuring our students achieve their highest academic potential.</p>
+          </div>
+        </article>
+
+        <article class="teacher">
+          <div class="front">
+            <img src="head of academic.jpg" alt="Head of Academics photo" />
+            <h4>Mr. Micheal Peter</h4>
+            <p>Head of Academics</p>
+          </div>
+          <div class="back">
+            <h4>Mr. Micheal Peter</h4>
+            <p>Oversees academic strategy, innovation, and assessment to maintain EduWave’s standard of excellence.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    © 2025 EduWave International School. All rights reserved.
+  </footer>
+
+  <script>
+    // Preloader
+    window.addEventListener("load", () => {
+      document.getElementById("preloader").classList.add("hidden");
+    });
+
+    // Menu Toggle
+    function toggleMenu() {
+      document.querySelector(".nav-links").classList.toggle("active");
+    }
+
+    // Dark Mode
+    const darkBtn = document.getElementById("darkModeToggle");
+    darkBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      const isDark = document.body.classList.contains("dark");
+      darkBtn.textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("darkMode", isDark);
+    });
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+        darkBtn.textContent = "☀️";
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- ===== Our History Section ===== -->
+<section class="history">
+  <h2>Our History</h2>
+  <p class="subtitle">A journey of growth, innovation, and excellence.</p>
+
+  <div class="timeline">
+    <div class="timeline-item left">
+      <div class="content">
+        <h3>2008 — Founding Year</h3>
+        <p>EduWave International School was established with a vision to redefine quality education in our community.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="content">
+        <h3>2012 — Expansion of Campus</h3>
+        <p>We expanded into a modern campus with advanced science and ICT laboratories, encouraging practical learning.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item left">
+      <div class="content">
+        <h3>2017 — Global Partnerships</h3>
+        <p>EduWave partnered with international education bodies to enhance curriculum standards and teacher training.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="content">
+        <h3>2022 — Innovation Hub Launch</h3>
+        <p>We launched our STEM Innovation Hub, enabling students to explore robotics, AI, and creative technologies.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item left">
+      <div class="content">
+        <h3>2025 — Continuing Excellence</h3>
+        <p>EduWave continues to inspire innovation, discipline, and global-minded learning for the next generation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  // ===== Timeline Scroll Animation =====
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".timeline-item");
+  
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.2 });
+  
+    items.forEach((item) => observer.observe(item));
+  });
+  </script>
+  
+
+
+
+
+
+
+  <script>
+    // ===== Animated Timeline with Glow Effect =====
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".timeline-item");
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      }, { threshold: 0.3 });
+    
+      items.forEach((item) => observer.observe(item));
+    });
+    </script>
+    
+
+
+
+
+
+      <script>
+        // ===== Scroll Progress Indicator (Pulsing + Fade-Out) =====
+        window.addEventListener("scroll", () => {
+          const progressBar = document.getElementById("progress-bar");
+          const scrollTop = document.documentElement.scrollTop;
+          const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrollPercent = (scrollTop / scrollHeight) * 100;
+        
+          // Update width dynamically
+          progressBar.style.width = scrollPercent + "%";
+        
+          // Fade out smoothly when near bottom
+          if (scrollPercent >= 98) {
+            progressBar.style.opacity = "0";
+          } else {
+            progressBar.style.opacity = "1";
+          }
+        });
+        </script>
+        
+
+
+
+
+
+        <script>
+          // ===== Scroll Progress Bar (One-Time Intro + Reactive Glow) =====
+          window.addEventListener("DOMContentLoaded", () => {
+            const progressBar = document.getElementById("progress-bar");
+            const hasPlayedIntro = sessionStorage.getItem("eduwaveProgressIntroPlayed");
+          
+            if (!hasPlayedIntro) {
+              // Play intro animation once
+              progressBar.style.animation = "introGlow 1.5s ease-out forwards, colorShift 8s infinite linear, pulseGlow 2.5s infinite ease-in-out";
+          
+              // Mark intro as played
+              setTimeout(() => {
+                sessionStorage.setItem("eduwaveProgressIntroPlayed", "true");
+                // Resume normal animations after intro
+                progressBar.style.animation = "colorShift 8s infinite linear, pulseGlow 2.5s infinite ease-in-out";
+              }, 1500);
+            } else {
+              // Skip intro for returning user in same session
+              progressBar.style.opacity = "1";
+              progressBar.style.animation = "colorShift 8s infinite linear, pulseGlow 2.5s infinite ease-in-out";
+            }
+          });
+          
+          // ===== Scroll Tracking =====
+          window.addEventListener("scroll", () => {
+            const progressBar = document.getElementById("progress-bar");
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            progressBar.style.width = scrollPercent + "%";
+          
+            // Reactive glow color
+            const colors = [
+              "rgba(14,165,233,0.7)",  // blue
+              "rgba(124,58,237,0.7)",  // purple
+              "rgba(236,72,153,0.7)",  // pink
+              "rgba(139,92,246,0.7)"   // violet
+            ];
+            const index = Math.floor((scrollPercent / 100) * (colors.length - 1));
+            progressBar.style.boxShadow = `0 0 20px ${colors[index]}, 0 0 30px ${colors[index]}`;
+          
+            // Fade out at bottom
+            if (scrollPercent >= 98) {
+              progressBar.style.opacity = "0";
+            } else {
+              progressBar.style.opacity = "1";
+            }
+          });
+          </script>
+          <!-- ===== Scroll to Top Button ===== -->
+<button id="scrollTopBtn" title="Back to Top">↑</button>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EduWave Internation School</title>
+
+  <!-- ===== Inline CSS ===== -->
+  <style>
+    :root{
+      --brand:#0ea5e9;
+      --brand-dark:#0b78b3;
+      --glass: rgba(255,255,255,0.06);
+      --muted: rgba(255,255,255,0.85);
+      --accent:#e7d3a8;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:#071023;color:#fff}
+    a{color:inherit;text-decoration:none}
+    /* HERO */
+    .hero{
+      min-height:56vh;
+      background:linear-gradient(180deg, rgba(3,7,18,0.55), rgba(3,7,18,0.65)), url('shool 4.jpg') center/cover no-repeat;
+      display:flex;align-items:center;justify-content:center;padding:3rem 1rem;
+      text-align:center;
+    }
+    .container{max-width:1100px;margin:0 auto;padding:1rem;}
+    h1.logo{font-size:2rem;letter-spacing:1px;margin-bottom:.5rem;color:var(--accent)}
+    p.lead{color:var(--muted);font-weight:300;margin-bottom:1rem;line-height:1.6}
+    .cta-row{margin-top:1.25rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+    .btn{background:var(--brand);border:none;padding:.7rem 1.05rem;border-radius:10px;color:#fff;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(14,165,233,0.12);transition:transform .12s ease}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.12)}
+    .btn:active{transform:translateY(1px)}
+    /* NAV */
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(3,7,18,0.85), rgba(3,7,18,0.6));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:0.8rem 1rem;max-width:1100px;margin:0 auto}
+    .nav-left{display:flex;align-items:center;gap:1rem}
+    .brand{display:flex;flex-direction:column}
+    .brand .name{font-weight:700;color:var(--accent)}
+    nav ul{display:flex;gap:.6rem;list-style:none}
+    nav li{padding:.35rem .6rem;border-radius:8px;cursor:pointer}
+    nav li:hover{background:rgba(255,255,255,0.02)}
+    .search{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.03);padding:.35rem .6rem;border-radius:8px}
+    .search input{background:transparent;border:0;color:inherit;outline:none;width:160px}
+    /* GRID / CARDS */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.25rem}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:.6rem}
+    .card h3{margin-bottom:.4rem}
+    .meta{font-size:.9rem;color:var(--muted);margin-bottom:.6rem}
+    /* CLASS LIST */
+    .class-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .class-card{display:flex;flex-direction:column}
+    .class-card .info{padding:.6rem}
+    .price{font-weight:700;color:var(--brand)}
+    /* BOOKSHOP */
+    .books-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .book{display:flex;flex-direction:column;gap:.5rem;padding:.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
+    .book img{height:140px;object-fit:cover;border-radius:8px}
+    /* FOOTER */
+    footer{padding:2rem 1rem;margin-top:2rem;background:linear-gradient(180deg, rgba(3,7,18,0.6), rgba(3,7,18,0.9));border-top:1px solid rgba(255,255,255,0.02)}
+    .flex{display:flex;gap:1rem;align-items:center}
+    .muted{color:rgba(255,255,255,0.6)}
+    /* Responsive */
+    @media (max-width:980px){.grid,.class-grid,.books-list{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){.grid,.class-grid,.books-list{grid-template-columns:repeat(1,1fr)} .search input{width:100px} header .nav{padding:.6rem}}
+    /* Hidden sections handling */
+    section.page{display:none;padding:2rem 1rem;min-height:60vh}
+    section.page.active{display:block}
+    /* small helpers */
+    .row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+    .badge{background:rgba(255,255,255,0.04);padding:.25rem .6rem;border-radius:999px;font-weight:600;font-size:.85rem}
+    .center{display:flex;align-items:center;justify-content:center}
+    .form{max-width:480px;background:rgba(255,255,255,0.02);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    input,select,textarea{width:100%;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;outline:none}
+    label{font-size:.9rem;margin-bottom:.25rem;display:block;color:var(--muted)}
+    .tiny{font-size:.85rem;color:var(--muted)}
+    .small{font-size:.9rem}
+    .text-right{display:flex;justify-content:flex-end}
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:60}
+    .modal{background:#061224;padding:1rem;border-radius:12px;max-width:520px;width:95%;border:1px solid rgba(255,255,255,0.04)}
+    .show{display:flex}
+  </style>
+</head>
+<body>
+  <!-- HEADER / NAV -->
+  <header>
+    <div class="nav container">
+      <div class="nav-left">
+        <div class="brand">
+          <div class="name">EduWave International School</div>
+          <div class="tiny">With you <em style="color:var(--accent)">for life</em></div>
+        </div>
+      </div>
+
+      <nav>
+        <ul id="main-nav">
+          <li data-link="home">Home</li>
+          <li data-link="classes">Classes</li>
+          <li data-link="bookshop">Bookshop</li>
+          <li data-link="payments">Payments</li>
+          <li data-link="about">About</li>
+        
+        </ul>
+      </nav>
+
+      <div class="row">
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <input id="site-search" placeholder="Search classes or books..." />
+        </div>
+        <button class="btn" id="cta-apply">Apply</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section id="home" class="hero page active">
+      <div class="container hero-content">
+        <h1 class="logo">EduWave International School</h1>
+        <p class="lead">A co-educational day & boarding school inspiring tomorrow’s innovators. From JSS to SS, we nurture curiosity, creativity and character.</p>
+        <div class="cta-row">
+          <button class="btn" data-nav="classes">Explore Classes</button>
+          <button class="btn secondary" data-nav="bookshop">Visit Bookshop</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLASSES -->
+    <section id="classes" class="page container">
+      <div class="row" style="justify-content:space-between;align-items:flex-end">
+        <div>
+          <h2>Our Classes</h2>
+          <div class="tiny">Select a class to view details, books and make payments</div>
+        </div>
+        <div class="row">
+          <div class="badge">JSS 1 — SS 3</div>
+          <div class="tiny">Showing 6 classes</div>
+        </div>
+      </div>
+
+      <div class="class-grid" style="margin-top:1rem">
+        <!-- We'll generate class cards via JS; placeholders first -->
+      </div>
+
+      <div style="margin-top:1rem">
+        <h3>Class Details</h3>
+        <div id="class-detail" class="card tiny">
+          <div class="muted">Select a class to see details and books.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKSHOP -->
+    <section id="bookshop" class="page container">
+      <div class="row" style="justify-content:space-between;align-items:flex-end">
+        <div>
+          <h2>Bookshop</h2>
+          <div class="tiny">Books are grouped by class. Click Buy to pay for a book.</div>
+        </div>
+        <div>
+          <select id="book-class-filter">
+            <option value="all">All Classes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="books-list" id="books-list" style="margin-top:1rem"></div>
+    </section>
+
+    <!-- PAYMENTS -->
+    <section id="payments" class="page container">
+      <h2>Payments</h2>
+      <div class="row" style="margin-top:1rem">
+        <div class="card" style="flex:1">
+          <h3>Make a Payment</h3>
+          <form id="payment-form" class="form">
+            <label>Pay for</label>
+            <select id="pay-for">
+              <option value="book">Book Purchase</option>
+              <option value="fee">Class Fee</option>
+            </select>
+
+            <label>Reference</label>
+            <input id="pay-ref" placeholder="e.g. BK-001" required />
+
+            <label>Amount (NGN)</label>
+            <input id="pay-amount" type="number" placeholder="2000" required />
+
+            <label>Student Name</label>
+            <input id="student-name" placeholder="Student full name" required />
+
+            <div class="text-right" style="margin-top:.75rem">
+              <button class="btn" id="pay-now" type="button">Pay with Paystack</button>
+            </div>
+            <div class="tiny muted" style="margin-top:.5rem">This demo uses Paystack inline — replace the public key in the script to go live.</div>
+          </form>
+        </div>
+
+        <div class="card" style="width:320px">
+          <h3>Recent Transactions</h3>
+          <div id="tx-list" class="tiny muted">No transactions yet.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="page container">
+      <h2>About EduWave</h2>
+      <p class="tiny muted" style="margin-top:.5rem">
+        EduWave International School is committed to providing world-class education with a focus on academic excellence,
+        character building and 21st-century skills. We serve learners aged 3–18 across day and boarding programs.
+      </p>
+
+      <div style="margin-top:1rem" class="grid">
+        <div class="card center">
+          <div>
+            <h3>Our Mission</h3>
+            <p class="tiny muted">To inspire and nurture confident, curious and kind learners who lead with integrity.</p>
+          </div>
+        </div>
+        <div class="card center">
+          <div>
+            <h3>Our Vision</h3>
+            <p class="tiny muted">To be a leading educational community that shapes global citizens through inquiry and innovation.</p>
+          </div>
+        </div>
+        <div class="card center">
+          <div>
+            <h3>Contact</h3>
+            <p class="tiny muted">contact@eduwave.edu | +234 800 000 0000 | Lagos, Nigeria</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="login" class="page container">
+      <h2>Login</h2>
+      <div style="margin-top:.8rem" class="row">
+        <div class="form">
+          <label>Email</label>
+          <input id="login-email" type="email" placeholder="you@example.com" />
+          <label>Password</label>
+          <input id="login-password" type="password" placeholder="password" />
+          <div style="margin-top:.6rem" class="text-right">
+            <button class="btn" id="btn-login">Login</button>
+          </div>
+          <div class="tiny muted" style="margin-top:.6rem">No account? <a href="#" data-nav="register">Register here</a></div>
+        </div>
+
+        <div style="flex:1;min-width:240px" class="tiny muted">
+          <h4>Demo accounts</h4>
+          <div>- Student: student@eduwave.test / pass123</div>
+          <div>- Admin: admin@eduwave.test / admin123</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="register" class="page container">
+      <h2>Register</h2>
+      <div style="margin-top:.8rem" class="row">
+        <div class="form">
+          <label>Full name</label>
+          <input id="reg-name" placeholder="Full name" />
+          <label>Email</label>
+          <input id="reg-email" type="email" placeholder="you@example.com" />
+          <label>Password</label>
+          <input id="reg-password" type="password" placeholder="password" />
+          <label>Role</label>
+          <select id="reg-role"><option value="student">Student</option><option value="parent">Parent</option><option value="teacher">Teacher</option></select>
+          <div style="margin-top:.6rem" class="text-right">
+            <button class="btn" id="btn-register">Create account</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMPLE FOOTER -->
+    <footer>
+      <div class="container row" style="justify-content:space-between;align-items:center">
+        <div>
+          <strong>EduWave International School</strong>
+          <div class="tiny muted">Copyright © <span id="year"></span></div>
+        </div>
+        <div class="row tiny muted">
+          <div>Privacy</div>
+          <div>Terms</div>
+          <div>Contact</div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- MODAL (BUY BOOK) -->
+  <div id="modal" class="modal-backdrop">
+    <div class="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong id="modal-title">Buy Book</strong>
+        <button id="modal-close" class="btn secondary">Close</button>
+      </div>
+
+      <div style="margin-top:.75rem" id="modal-body">
+        <!-- populated by JS -->
+      </div>
+
+      <div style="margin-top:.8rem" class="text-right">
+        <button class="btn" id="modal-pay">Pay (Paystack)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paystack script (inline demo). Replace key when going live. -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <!-- ===== Inline JS ===== -->
+  <script>
+    /********* Basic site config & data *********/
+    const SITE = {
+      name: "EduWave International School",
+      accent: "#0ea5e9",
+      classes:[
+        { id:"JSS1", title:"JSS 1", desc:"Foundation year focusing on core literacy and numeracy.", img:"images/jss1.jpg", fee:15000 },
+        { id:"JSS2", title:"JSS 2", desc:"Building on fundamentals with structured subject study.", img:"images/jss2.jpg", fee:16000 },
+        { id:"JSS3", title:"JSS 3", desc:"Preparation for junior secondary examinations.", img:"images/jss3.jpg", fee:17000 },
+        { id:"SS1", title:"SS 1", desc:"Senior secondary entry — subject specialization begins.", img:"images/ss1.jpg", fee:22000 },
+        { id:"SS2", title:"SS 2", desc:"Deepening knowledge and exam preparation.", img:"images/ss2.jpg", fee:23000 },
+        { id:"SS3", title:"SS 3", desc:"Final year — final exams and graduation preparation.", img:"images/ss3.jpg", fee:24000 },
+      ],
+      books:[
+        { id:"B1", classId:"JSS1", title:"Mathematics — JSS 1", price:1200, img:"images/book-math-jss1.jpg" },
+        { id:"B2", classId:"JSS1", title:"English — JSS 1", price:900, img:"images/book-eng-jss1.jpg" },
+        { id:"B3", classId:"JSS2", title:"Mathematics — JSS 2", price:1300, img:"images/book-math-jss2.jpg" },
+        { id:"B4", classId:"SS1", title:"Physics — SS 1", price:1800, img:"images/book-phy-ss1.jpg" },
+        { id:"B5", classId:"SS3", title:"Exam Practice — SS 3", price:2000, img:"images/book-exam-ss3.jpg" },
+        // add more as needed
+      ],
+      paystackKey: "pk_test_f35a1fc6325435903eea9212bf6640f0436188dd" // <-- replace with your public key to accept real payments
+    };
+
+    // utility
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    // set year
+    $('#year').textContent = new Date().getFullYear();
+
+    /********* Navigation (single-file "pages") *********/
+    function showPage(id){
+      $$('.page').forEach(s => s.classList.toggle('active', s.id === id));
+      // highlight nav
+      $$('#main-nav li').forEach(li => li.style.background = (li.dataset.link === id ? 'rgba(255,255,255,0.03)' : 'transparent'));
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    // nav click handlers
+    $$('#main-nav li').forEach(li => li.addEventListener('click', e => {
+      showPage(li.dataset.link);
+    }));
+    // buttons with data-nav
+    $$('[data-nav]').forEach(b => b.addEventListener('click', e => showPage(e.currentTarget.dataset.nav)));
+
+    /********* Search box (simple) *********/
+    $('#site-search').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase().trim();
+      // filter books and classes
+      const filteredClasses = SITE.classes.filter(c => c.title.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q));
+      renderClassGrid(filteredClasses);
+      const filteredBooks = SITE.books.filter(b => b.title.toLowerCase().includes(q));
+      renderBooks(filteredBooks);
+    });
+
+    /********* Render classes *********/
+    function renderClassGrid(list = SITE.classes){
+      const grid = document.querySelector('.class-grid');
+      grid.innerHTML = '';
+      list.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'card class-card';
+        card.innerHTML = `
+          <img src="${c.img}" alt="${c.title}" onerror="this.style.background='#0b1220';this.src=''">
+          <div class="info">
+            <h3>${c.title}</h3>
+            <div class="meta">${c.desc}</div>
+            <div class="row" style="margin-top:.5rem;justify-content:space-between;align-items:center">
+              <div class="tiny">Fee: <span class="price">NGN ${numberWithCommas(c.fee)}</span></div>
+              <div>
+                <button class="btn tiny" data-action="view" data-id="${c.id}">View</button>
+                <button class="btn secondary tiny" data-action="pay" data-id="${c.id}">Pay Fee</button>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // attach listeners
+      grid.querySelectorAll('button[data-action="view"]').forEach(b => b.addEventListener('click', e => {
+        const id = e.currentTarget.dataset.id;
+        showClassDetail(id);
+        showPage('classes');
+      }));
+      grid.querySelectorAll('button[data-action="pay"]').forEach(b => b.addEventListener('click', e => {
+        const id = e.currentTarget.dataset.id;
+        const cls = SITE.classes.find(x => x.id === id);
+        preparePayment({ reference: `FEE-${id}-${Date.now()}`, amount: cls.fee, student: '', meta:{classId:id, type:'fee'} });
+        showPage('payments');
+      }));
+    }
+
+    function showClassDetail(id){
+      const detail = $('#class-detail');
+      const cls = SITE.classes.find(c => c.id === id);
+      const books = SITE.books.filter(b => b.classId === id);
+      detail.innerHTML = `
+        <div class="row" style="gap:1rem">
+          <img src="${cls.img}" alt="${cls.title}" style="width:160px;height:110px;object-fit:cover;border-radius:8px" onerror="this.style.background='#0b1220';this.src=''">
+          <div>
+            <h3>${cls.title}</h3>
+            <div class="tiny muted">${cls.desc}</div>
+            <div style="margin-top:.5rem" class="tiny">Class fee: <strong>NGN ${numberWithCommas(cls.fee)}</strong></div>
+            <div style="margin-top:.6rem">
+              <button class="btn" id="pay-class-fee">Pay Class Fee</button>
+              <button class="btn secondary" id="view-class-books">View Books (${books.length})</button>
+            </div>
+          </div>
+        </div>
+      `;
+      $('#pay-class-fee').addEventListener('click', () => {
+        preparePayment({ reference: `FEE-${id}-${Date.now()}`, amount: cls.fee, student:'', meta:{classId:id, type:'fee'} });
+        showPage('payments');
+      });
+      $('#view-class-books').addEventListener('click', () => {
+        renderBooks(books);
+        showPage('bookshop');
+      });
+    }
+
+    /********* Books render & buy modal *********/
+    function renderBooks(list = SITE.books){
+      const container = $('#books-list');
+      container.innerHTML = '';
+      list.forEach(b => {
+        const el = document.createElement('div');
+        el.className = 'book';
+        el.innerHTML = `
+          <img src="${b.img}" alt="${b.title}" onerror="this.style.background='#071a2b';this.src='';height:160px;">
+          <div>
+            <h4 style="margin-bottom:.25rem">${b.title}</h4>
+            <div class="tiny muted">Class: ${b.classId}</div>
+            <div style="margin-top:.5rem;display:flex;justify-content:space-between;align-items:center">
+              <div class="price">NGN ${numberWithCommas(b.price)}</div>
+              <div>
+                <button class="btn" data-buy="${b.id}">Buy</button>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+      // buy handlers
+      container.querySelectorAll('button[data-buy]').forEach(btn => btn.addEventListener('click', e => {
+        const bookId = e.currentTarget.dataset.buy;
+        const book = SITE.books.find(x => x.id === bookId);
+        openBuyModal(book);
+      }));
+    }
+
+    function openBuyModal(book){
+      $('#modal-title').textContent = `Buy — ${book.title}`;
+      $('#modal-body').innerHTML = `
+        <div style="display:grid;grid-template-columns:120px 1fr;gap:1rem;align-items:center">
+          <img src="${book.img}" alt="" style="width:120px;height:120px;object-fit:cover;border-radius:8px" onerror="this.style.background='#071a2b';this.src=''">
+          <div>
+            <h4>${book.title}</h4>
+            <div class="tiny muted">Class: ${book.classId}</div>
+            <div style="margin-top:.5rem"><strong>Price: NGN ${numberWithCommas(book.price)}</strong></div>
+            <div style="margin-top:.5rem">
+              <label class="tiny">Student name</label>
+              <input id="modal-student" placeholder="Student name" />
+            </div>
+          </div>
+        </div>
+      `;
+      $('#modal').classList.add('show');
+      $('#modal-close').onclick = () => $('#modal').classList.remove('show');
+      $('#modal-pay').onclick = () => {
+        const student = $('#modal-student').value.trim() || 'Unknown';
+        preparePayment({ reference:`BOOK-${book.id}-${Date.now()}`, amount:book.price, student, meta:{bookId:book.id, title:book.title, type:'book'} });
+        $('#modal').classList.remove('show');
+        showPage('payments');
+      };
+    }
+
+    /********* Payment handling (Paystack inline demo) *********/
+    function preparePayment({reference, amount, student, meta}){
+      $('#pay-ref').value = reference;
+      $('#pay-amount').value = amount;
+      $('#student-name').value = student;
+      // attach meta to button for later
+      $('#pay-now').dataset.meta = JSON.stringify(meta || {});
+    }
+
+    // number formatting
+    function numberWithCommas(x){ if(!x && x !== 0) return ''; return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+
+    // handle pay now
+    $('#pay-now').addEventListener('click', () => {
+      const amount = Number($('#pay-amount').value);
+      const reference = $('#pay-ref').value || `TX-${Date.now()}`;
+      const student = $('#student-name').value || 'Unknown';
+      const meta = JSON.parse($('#pay-now').dataset.meta || '{}');
+      if(!amount || amount <= 0){ alert("Enter a valid amount."); return; }
+
+      // initialise Paystack inline
+      const handler = PaystackPop.setup({
+        key: SITE.paystackKey,
+        email: (localStorage.getItem('userEmail') || 'buyer@example.com'),
+        amount: amount * 100, // kobo
+        ref: reference,
+        metadata: {
+          custom_fields: [
+            { display_name: "Student", variable_name: "student_name", value: student },
+            { display_name: "Meta", variable_name: "meta", value: JSON.stringify(meta) }
+          ]
+        },
+        onClose: function(){
+          alert('Payment window closed.');
+        },
+        callback: function(response){
+          // successful payment
+          const tx = {
+            reference: response.reference,
+            amount,
+            student,
+            meta,
+            gatewayResponse: response
+          };
+          saveTransaction(tx);
+          appendTransaction(tx);
+          alert('Payment successful! Reference: ' + response.reference);
+        }
+      });
+      handler.openIframe();
+    });
+
+    /********* Transactions (local only) *********/
+    function saveTransaction(tx){
+      const all = JSON.parse(localStorage.getItem('eduwave_tx') || '[]');
+      all.unshift({ ...tx, date: new Date().toISOString() });
+      localStorage.setItem('eduwave_tx', JSON.stringify(all));
+    }
+    function loadTransactions(){
+      const all = JSON.parse(localStorage.getItem('eduwave_tx') || '[]');
+      return all;
+    }
+    function appendTransaction(tx){
+      const list = loadTransactions();
+      const tpl = list.slice(0,6).map(t => `<div style="margin-bottom:.5rem"><strong>${t.reference}</strong> • NGN ${numberWithCommas(t.amount)} • ${t.student || ''} <div class="tiny muted">${new Date(t.date || Date.now()).toLocaleString()}</div></div>`).join('');
+      $('#tx-list').innerHTML = tpl || 'No transactions yet.';
+    }
+
+    /********* Auth (simple localStorage) *********/
+    $('#btn-register').addEventListener('click', () => {
+      const name = $('#reg-name').value.trim();
+      const email = $('#reg-email').value.trim();
+      const pass = $('#reg-password').value;
+      const role = $('#reg-role').value;
+      if(!name || !email || !pass){ alert('Please fill all fields'); return; }
+      const users = JSON.parse(localStorage.getItem('eduwave_users') || '[]');
+      if(users.find(u => u.email === email)){ alert('An account with this email exists'); return; }
+      users.push({ name, email, pass, role });
+      localStorage.setItem('eduwave_users', JSON.stringify(users));
+      localStorage.setItem('userEmail', email);
+      alert('Account created — you are now logged in.');
+      showPage('home');
+    });
+
+    $('#btn-login').addEventListener('click', () => {
+      const email = $('#login-email').value.trim();
+      const pass = $('#login-password').value;
+      const users = JSON.parse(localStorage.getItem('eduwave_users') || '[]');
+      const u = users.find(x => x.email === email && x.pass === pass);
+      if(u){
+        localStorage.setItem('userEmail', email);
+        alert('Login successful — welcome ' + u.name);
+        showPage('home');
+      } else {
+        // allow demo accounts
+        if((email === 'student@eduwave.test' && pass === 'pass123') || (email === 'admin@eduwave.test' && pass === 'admin123')){
+          localStorage.setItem('userEmail', email);
+          alert('Demo login successful');
+          showPage('home');
+        } else alert('Invalid credentials');
+      }
+    });
+
+    /********* Init UI on load *********/
+    function init(){
+      renderClassGrid();
+      renderBooks();
+      // populate book-class-filter
+      const sel = $('#book-class-filter');
+      SITE.classes.forEach(c => {
+        const opt = document.createElement('option'); opt.value = c.id; opt.textContent = c.title; sel.appendChild(opt);
+      });
+      sel.addEventListener('change', e => {
+        const v = e.target.value;
+        if(v === 'all') renderBooks();
+        else renderBooks(SITE.books.filter(b => b.classId === v));
+      });
+
+      // search quick nav for first CTA
+      $('#cta-apply').addEventListener('click', ()=> alert('Application flow not included in this demo — create an application form or contact us.'));
+
+      // modal close via backdrop
+      $('#modal').addEventListener('click', e => { if(e.target === $('#modal')) $('#modal').classList.remove('show'); });
+
+      // load txs
+      appendTransaction();
+    }
+    init();
+
+    /********* Small helpers: keyboard nav to pages via hash *********/
+    window.addEventListener('hashchange', () => {
+      const id = location.hash.replace('#','');
+      if(id) showPage(id);
+    });
+    // load page from hash if present
+    if(location.hash) showPage(location.hash.replace('#',''));
+
+
+
+        // load page from hash if present on refresh
+        if (location.hash) {
+      const id = location.hash.replace('#', '');
+      showPage(id);
+    } else {
+      showPage('home');
+    }
+  </script>
+</body>
+</html>
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+

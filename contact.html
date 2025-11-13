@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — EduWave International School</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ====== Base Styles ====== */
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9fafc;
+      color: #222;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    header {
+      background: #002855;
+      color: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: #f9d342;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* ====== Page Header ====== */
+    .page-header {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      background: #eaf1ff;
+      color: #002855;
+    }
+
+    .page-header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ====== Contact Section ====== */
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 3rem 2rem;
+      background: #fff;
+    }
+
+    .contact-info {
+      max-width: 400px;
+      line-height: 1.8;
+    }
+
+    .contact-info p {
+      margin: 0.8rem 0;
+      font-size: 1rem;
+    }
+
+    .map iframe {
+      width: 350px;
+      height: 250px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      background: #002855;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* ====== Dark Mode Styles ====== */
+    body.dark-mode {
+      background: #0d1117;
+      color: #e6edf3;
+    }
+
+    body.dark-mode header {
+      background: #161b22;
+      color: #e6edf3;
+    }
+
+    body.dark-mode .nav-links li a {
+      color: #e6edf3;
+    }
+
+    body.dark-mode .nav-links li a:hover {
+      color: #58a6ff;
+    }
+
+    body.dark-mode .page-header {
+      background: #1b2230;
+      color: #e6edf3;
+    }
+
+    body.dark-mode .contact {
+      background: #1a1f29;
+    }
+
+    body.dark-mode footer {
+      background: #161b22;
+    }
+
+    /* ====== Dark Mode Button ====== */
+    .dark-btn {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      border-radius: 50%;
+      padding: 6px 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    }
+
+    .dark-btn:hover {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    }
+
+    .spin {
+      animation: spinToggle 0.5s ease forwards;
+    }
+
+    @keyframes spinToggle {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(360deg) scale(1.1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .map iframe {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">EduWave International School</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Academics</a></li>
+        <li><a href="admission.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="classes.html">Classes</a></li>
+      </ul>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <button id="darkModeToggle" class="dark-btn">🌙</button>
+    </nav>
+  </header>
+  
+  <section class="page-header">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you. Reach out to us anytime.</p>
+  </section>
+
+  <section class="contact">
+    <div class="contact-info">
+      <p><strong>Address:</strong> 123 EduWave Street, Lagos, Nigeria</p>
+      <p><strong>Email:</strong> info@eduwave.edu.ng</p>
+      <p><strong>Phone:</strong> +234 801 234 5678</p>
+    </div>
+    <div class="map">
+      <iframe src="https://maps.google.com/maps?q=Lagos&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 EduWave International School. All rights reserved.</p>
+  </footer>
+
+  <script>
+  // ===== Dark Mode Toggle =====
+  const toggleBtn = document.getElementById("darkModeToggle");
+  const body = document.body;
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark-mode");
+    toggleBtn.textContent = "☀️";
+  }
+
+  // Toggle dark mode
+  toggleBtn.addEventListener("click", () => {
+    toggleBtn.classList.add("spin");
+    body.classList.toggle("dark-mode");
+
+    if (body.classList.contains("dark-mode")) {
+      toggleBtn.textContent = "☀️";
+      localStorage.setItem("theme", "dark");
+    } else {
+      toggleBtn.textContent = "🌙";
+      localStorage.setItem("theme", "light");
+    }
+
+    setTimeout(() => toggleBtn.classList.remove("spin"), 500);
+  });
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+    
